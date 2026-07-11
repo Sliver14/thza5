@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Member {
+  id            String                @id @default(uuid())
+  email         String                @unique
+  phone         String                @unique
+  password      String
+  firstName     String
+  lastName      String
+  kcUsername    String
+  chapter       String
+  careGroup     String
+  role          String
+  occupation    String
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  registrations ProgramRegistration[]
+}
+
+model Program {
+  id            String                @id @default(uuid())
+  title         String
+  description   String
+  slug          String                @unique
+  startDate     DateTime
+  endDate       DateTime
+  venue         String
+  flyerUrl      String?
+  qrCodeUrl     String?
+  status        String                @default("UPCOMING")
+  customFields  Json                  @default("[]")
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  registrations ProgramRegistration[]
+}
+
+model ProgramRegistration {
+  id             String    @id @default(uuid())
+  memberId       String
+  programId      String
+  fieldResponses Json      @default("{}")
+  registeredAt   DateTime  @default(now())
+  attended       Boolean   @default(false)
+  attendedAt     DateTime?
+  ticketQrUrl    String?
+  member         Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  program        Program   @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@unique([memberId, programId])
+}
