@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
 
 export const authOptions = {
   providers: [
@@ -21,6 +20,7 @@ export const authOptions = {
 
         if (!admin) return null;
 
+        const bcrypt = await import('bcryptjs');
         const isValid = await bcrypt.compare(credentials.password, admin.password);
         if (!isValid) return null;
 
@@ -48,6 +48,7 @@ export const authOptions = {
 
         if (!member) return null;
 
+        const bcrypt = await import('bcryptjs');
         const isValid = await bcrypt.compare(credentials.password, member.password);
         if (!isValid) return null;
 

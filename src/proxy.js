@@ -25,5 +25,3 @@ export async function proxy(request) {
 export const config = {
   matcher: ["/admin/:path*", "/dashboard/:path*"],
 };
-
-export const runtime = "nodejs";
