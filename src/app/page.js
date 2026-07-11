@@ -106,7 +106,7 @@ export default async function Home() {
                 href={`/register/${nextProgram.slug}`}
                 className="block w-full lg:w-auto px-8 py-4 bg-gradient-to-r from-[#A8006E] to-[#E5007F] hover:from-[#E5007F] hover:to-[#A8006E] text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-all duration-300 text-center shadow-md shadow-[#A8006E]/10 border border-transparent active:scale-[0.98]"
               >
-                Register
+                Registern
               </a>
             </div>
           </section>
